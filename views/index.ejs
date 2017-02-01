@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Employees</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/normalize.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <a href="add-employee" class="btn">+ Add new employee</a>
+      <table class="table table-striped" style="margin-top: 20px">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Job Tile</th>
+            <th>Employment Date</th>
+            <th>Rate</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (users.length > 0) { %>
+            <% users.map(user => { %>
+              <tr>
+                <td>
+                  <%= user.firstName %>
+                    <%= user.lastName %>
+                </td>
+                <td>
+                  <%= user.jobTitle %>
+                </td>
+                <td>
+                  <%= user.employmentDate %>
+                </td>
+                <td>
+                  <%= user.rate %> $ </td>
+                <td><a class="delete" id="<%= user._id %>" href="#">Delete</a></td>
+              </tr>
+              <% }) %>
+                <% } else { %>
+                  <h2>No users</h2>
+                  <% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>

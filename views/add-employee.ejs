@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Add employee</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/normalize.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <h1>Add employee</h1>
+      <div class="message"></div>
+      <form action="/add-employee" method="POST" role="form" class="form">
+        <div class="control-group">
+          <label for="firstNameInput">First Name:</label>
+          <input type="text" id="firstNameInput" name="firstName" required>
+        </div>
+        <div class="control-group">
+          <label for="lastNameInput">Last Name:</label>
+          <input type="text" id="lastNameInput" name="lastName" required>
+        </div>
+        <div class="control-group">
+          <label for="emplymentDateNameInput">Employment Date</label>
+          <input type="date" id="emplymentDateNameInput" name="employmentDate" required>
+        </div>
+        <div class="control-group">
+          <label for="rateInput">Rate</label>
+          <input type="number" id="rateInput" name="rate" required>
+        </div>
+        <div class="control-group">
+          <label for="jobTitleSelect">Job title</label>
+          <select name="jobTitle" id="jobTitleSelect">
+            <option value="1">CEO</option>
+            <option value="2">Business Analyst</option>
+            <option value="3">Developer</option>
+            <option value="4">QA</option>
+          </select>
+        </div>
+        <div class="control-group p-top-20">
+          <div class="back_btn">
+            <a href="/" class="btn btn-default">Back</a>
+          </div>
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+      </form>
+      </div>
+
+  </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>
