@@ -27,18 +27,10 @@
           <% if (users.length > 0) { %>
             <% users.map(user => { %>
               <tr>
-                <td>
-                  <%= user.firstName %>
-                    <%= user.lastName %>
-                </td>
-                <td>
-                  <%= user.jobTitle %>
-                </td>
-                <td>
-                  <%= user.employmentDate %>
-                </td>
-                <td>
-                  <%= user.rate %> $ </td>
+                <td><%= user.fullName %></td>
+                <td><%= user.jobTitle %></td>
+                <td><%= user.employmentDate %></td>
+                <td><%= user.rate %> $ </td>
                 <td><a class="delete" id="<%= user._id %>" href="#">Delete</a></td>
               </tr>
               <% }) %>

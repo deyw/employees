@@ -59,7 +59,14 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(path.join() + '/public'));
 
-
+// Date formatting
+const parseDate = date => {
+  const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  const month = date.getMonth() + 1; // month's start from 0...
+  const monthWithZero = month < 10 ? '0' + month : month;
+  const year = date.getFullYear();
+  return `${day} / ${monthWithZero} / ${year}`;
+};
 
 
 // display main page
@@ -69,7 +76,13 @@ app.get('/', (req, res) => {
     .then(db => {
       db.collection('data').find({}).toArray()
         .then(users => {
-          res.render('index', { users });
+          const usersWithProperDate = users.map( user => {
+            const newUser = user;
+            newUser.employmentDate = parseDate(user.employmentDate);
+            newUser.fullName = `${user.firstName} ${user.lastName}`;
+            return newUser;
+          });
+          res.render('index', { users: usersWithProperDate });
         });
     })
     .catch(err => console.log(err));
@@ -83,9 +96,18 @@ app.get('/add-employee', (req, res) => {
   });
 });
 
-// Добавляем сотрудника
+
 app.post('/add-employee', (req, res) => {
-  let employee = req.body;
+  let data = req.body;
+  
+  const employee = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    jobTitle: data.jobTitle,
+    employmentDate: new Date(data.employmentDate),
+    rate: data.rate
+  };
+
   mongoClient.connect(dbURL).then(db => {
     db.collection('data').insertOne(employee)
       .then(() => {
@@ -103,7 +125,6 @@ app.post('/add-employee', (req, res) => {
 
 // Delete Employee
 app.delete('/employee/:id', (req, res) => {
-
   const user_id = req.params.id;
   mongoClient.connect(dbURL).then(db => {
     db.collection('data').deleteOne({_id: ObjectID(user_id)})
